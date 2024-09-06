@@ -1,0 +1,68 @@
+{
+  "auth": {
+    "welcomeMsg": "ยินดีต้องรับสู่ Dashboard",
+    "email": "อีเมล",
+    "login": "เข้าสู่ระบบ",
+    "password": "รหัสผ่าน",
+    "userNotFound": "ไม่พบข้อมูลผู้ใช้งาน หรือรหัสผ่านผิดพลาด",
+    "loggedInSuccessfully": "เข้าสู่ระบบสำเร็จ"
+  },
+  "menu": {
+    "dashboard": "Dashboard",
+    "userManagement": "User Management",
+    "home": "Home"
+  },
+  "user": {
+    "logout": "ออกจากระบบ"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "filterTitle": "ตัวกรอง",
+    "wimTitle": "Data From WIM",
+    "3DTitle": "Data From 3D",
+    "filterStartTitle": "วันเริ่มต้น",
+    "filterEndTitle": "วันสิ้นสุด",
+    "searchBtnTitle": "ค้นหา",
+    "switchToPercentView": "สลับเป็นมุมมอง %",
+    "switchToTotalView": "สลับเป็นมุมมองจำนวนคัน"
+  },
+  "userManagement": {
+    "title": "User List",
+    "updateUser": "Update User",
+    "button": {
+      "update": "แก้ไข",
+      "resetPassword": "เปลี่ยนรหัสผ่าน",
+      "create": "สร้างผู้ใช้งานใหม่"
+    },
+    "active": "เปิดใช้งาน",
+    "inActive": "ปิดใช้งาน",
+    "tableHeader": {
+      "name": "ชื่อ - สกุล",
+      "email": "อีเมล",
+      "role": "สิทธิ์",
+      "lastLogIn": "เข้าสู่ระบบล่าสุด",
+      "status": "สถานะ",
+      "action": ""
+    },
+    "form": {
+      "email": "อีเมล",
+      "name": "ชื่อ - สกุล",
+      "role": "สิทธิ์",
+      "status": "สถานะ",
+      "saveBtn": "บันทึก",
+      "backBtn": "ย้อนกลับ"
+    },
+    "create": {
+      "title": "เพิ่มผู้ใช้งานใหม่ข้อมูล"
+    },
+    "update": {
+      "title": "แก้ไขข้อมูลผู้ใช้งาน"
+    },
+    "resetPassword": {
+      "title": "เปลี่ยนรหัสผ่าน",
+      "newPassword": "รหัสผ่านใหม่",
+      "confirmPassword": "ยืนยันรหัสผ่านใหม่",
+      "btn": "เปลี่ยนรหัสผ่าน"
+    }
+  }
+}

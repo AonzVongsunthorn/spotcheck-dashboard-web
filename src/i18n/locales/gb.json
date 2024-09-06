@@ -1,0 +1,33 @@
+{
+  "auth": {
+    "welcomeMsg": "Welcome to Dashboard",
+    "email": "Email",
+    "login": "Login",
+    "password": "Password"
+  },
+  "menu": {
+    "dashboard": "Dashboard",
+    "userManagement": "User Management"
+  },
+  "user": {
+    "logout": "Logout"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "filterTitle": "Filter",
+    "wimTitle": "Data From WIM",
+    "3DTitle": "Data From 3D",
+    "filterStartTitle": "Start Date",
+    "filterEndTitle": "End Date",
+    "searchBtnTitle": "Search"
+  },
+  "userManagement": {
+    "title": "User Management",
+    "button": {
+      "update": "Update",
+      "resetPassword": "Reset Password",
+      "enable": "Enable",
+      "disable": "Disable"
+    }
+  }
+}
