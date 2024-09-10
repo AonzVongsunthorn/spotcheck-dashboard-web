@@ -6,7 +6,7 @@ import {
   type RouteLocationNormalized,
 } from 'vue-router'
 
-import { useLoginStore } from '../stores/v2/loginStore'
+import { useAuthStore } from '../stores/authStore'
 import middlewarePipeline from './middlewarePipeline'
 import Dashboard2 from '../layouts/v2/Dashboard.vue'
 import requireAuth from './middleware/requireAuth'
@@ -18,8 +18,13 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: '/v2/auth/login',
-    name: 'v2-login',
+    name: 'login',
     component: () => import('../pages/v2/auth/Login.vue'),
+  },
+  {
+    path: '/v2/otp',
+    name: 'otp',
+    component: () => import('../pages/v2/auth/OTP.vue'),
   },
   {
     path: '/report/:startDate/:endDate/',
@@ -125,7 +130,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
-  const loginStore = useLoginStore()
+  const authStore = useAuthStore()
 
   if (!to.meta.middleware) {
     return next()
@@ -136,7 +141,7 @@ router.beforeEach((to: RouteLocationNormalized, from: RouteLocationNormalized, n
     to,
     from,
     next,
-    loginStore,
+    authStore,
   }
 
   return middleware[0]({

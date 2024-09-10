@@ -4,7 +4,6 @@
       <div class="text-white text-lg flex items-center gap-5 xl:hidden">
         เปิดจราจร <VaSwitch v-model="switchTraffic"/>
       </div>
-
     </div>
     <loading v-model:active="isShowLoadingDialog" :is-full-page="true" />
     <div class="top-nav xl:flex p-10 flex-initial hidden">
@@ -67,38 +66,18 @@
     </div>
     <div>
       <div class="xl:flex hidden">
-        <div id="cctvCard" class="w-1/3 ml-5 mr-3">
+        <div id="cctvCard" class="w-1/2 ml-3">
           <va-card>
             <canvas id="cctvCanvas" class="mx-auto w-full h-full"></canvas>
           </va-card>
         </div>
-        <div id="statisticCard" class="pr-3 w-1/3">
-          <Top5TrafficFromIMPSDoughnutChart
-            v-if="currentTrafficFromSummaryReportAPI.data.length"
-            :key="refreshChart"
-            :data="currentTrafficFromSummaryReportAPI"
-          />
-        </div>
-        <div class="w-1/3 pr-3 mr-4">
-          <va-card id="historyChartCard" class="text-center">
-            <div v-if="!dataSetForHistoryChart.datasets.length && isHistoryChartLoadingReadyToShow">
-              <h1 class="ml-56 pt-20">
-                <spring-spinner :animation-duration="3000" :size="60" color="#20283E" />
-              </h1>
-              <h1 class="text-3xl pt-10">กำลังดาวน์โหลดข้อมูล</h1>
-              <h1 class="text-3xl">ประวัติการจราจรย้อนหลัง 5 วัน</h1>
-            </div>
-            <div>
-              <OverWeightVSTotalTrafficChart
-                v-if="dataSetForHistoryChart.datasets.length"
-                :key="refreshChart"
-                :dataset="dataSetForHistoryChart"
-              />
-            </div>
+        <div id="cctvCard" class="w-1/2 ml-2 mr-3">
+          <va-card>
+            <canvas id="cctvCanvas2" class="mx-auto w-full h-full"></canvas>
           </va-card>
         </div>
       </div>
-      <div class="mx-10 overflow-y-scroll section-table xl:block hidden">
+      <div class="mx-10 overflow-y-scroll section-table xl:block hidden mt-4">
         <table v-for="(row, index) in currentTrafficList" class="table-fixed w-full table-list mt-2">
           <tr :class="getRowColor(index)">
             <td :class="[IS_3D_ENABLE === 'true' ? 'w-1/3' : 'w-1/6']">
@@ -272,110 +251,6 @@
               <canvas id="cctvCanvas_m2" class="mx-auto w-full p-3"></canvas>
             </va-card>
           </div>
-          <!-- <div class="grid grid-cols-2 gap-2 h-fit">
-            <div class="shadow-md rounded-md bg-white p-2 relative">
-              <div class="absolute inset-y-0 left-0 w-[5px] bg-blue-800 rounded-l-md"></div>
-              <div class="flex gap-2">
-                <div class="bg-blue-800 w-14 h-14 rounded-full flex items-center justify-center flex-initial">
-                  <svg
-                    class="h-8 w-8 text-white"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    stroke-width="2"
-                    stroke="currentColor"
-                    fill="none"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path stroke="none" d="M0 0h24v24H0z" />
-                    <polyline points="21 12 17 12 14 20 10 4 7 12 3 12" />
-                  </svg>
-                </div>
-                <div class="flex flex-col">
-                  <div class="text-lg font-bold">0</div>
-                  <div>จำนวนรถทั้งหมด</div>
-                </div>
-              </div>
-            </div>
-            <div class="shadow-md rounded-md bg-white p-2 relative">
-              <div class="absolute inset-y-0 left-0 w-[5px] bg-blue-800 rounded-l-md"></div>
-              <div class="flex gap-2">
-                <div class="bg-blue-800 w-14 h-14 rounded-full flex items-center justify-center flex-initial">
-                  <svg
-                    class="h-8 w-8 text-white"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    stroke-width="2"
-                    stroke="currentColor"
-                    fill="none"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path stroke="none" d="M0 0h24v24H0z" />
-                    <path d="M5 12l5 5l10 -10" />
-                  </svg>
-                </div>
-                <div class="flex flex-col">
-                  <div class="text-lg font-bold">0</div>
-                  <div>น้ำหนักผ่านกฏหมาย</div>
-                </div>
-              </div>
-            </div>
-            <div class="shadow-md rounded-md bg-white p-2 relative">
-              <div class="absolute inset-y-0 left-0 w-[5px] bg-blue-800 rounded-l-md"></div>
-              <div class="flex gap-2">
-                <div class="bg-blue-800 w-14 h-14 rounded-full flex items-center justify-center flex-initial">
-                  <svg
-                    class="h-8 w-8 text-white"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    stroke-width="2"
-                    stroke="currentColor"
-                    fill="none"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path stroke="none" d="M0 0h24v24H0z" />
-                    <polyline points="3 17 9 11 13 15 21 7" />
-                    <polyline points="14 7 21 7 21 14" />
-                  </svg>
-                </div>
-                <div class="flex flex-col">
-                  <div class="text-lg font-bold">0</div>
-                  <div>นำ้หนักเกินกฏหมาย</div>
-                </div>
-              </div>
-            </div>
-            <div class="shadow-md rounded-md bg-white p-2 relative">
-              <div class="absolute inset-y-0 left-0 w-[5px] bg-blue-800 rounded-l-md"></div>
-              <div class="flex gap-2">
-                <div class="bg-blue-800 w-14 h-14 rounded-full flex items-center justify-center flex-initial">
-                  <svg
-                    class="h-8 w-8 text-white"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <polyline points="16 3 21 3 21 8" />
-                    <line x1="4" y1="20" x2="21" y2="3" />
-                    <polyline points="21 16 21 21 16 21" />
-                    <line x1="15" y1="15" x2="21" y2="21" />
-                    <line x1="4" y1="4" x2="9" y2="9" />
-                  </svg>
-                </div>
-                <div class="flex flex-col">
-                  <div class="text-lg font-bold">0</div>
-                  <div>คร่อมช่องจราจร</div>
-                </div>
-              </div>
-            </div>
-          </div> -->
         </div>
         <!-- Card List -->
         <div class="grid grid-cols-12 gap-3 mt-2">
@@ -490,7 +365,8 @@
   import noImage from '../../../assets/no-image.png'
 
   const listCarStore = useDashboardStore()
-  const CCTV_URL = import.meta.env.VITE_CCTV_URL
+  const CCTV_URL_1 = import.meta.env.VITE_CCTV_URL_1
+  const CCTV_URL_2 = import.meta.env.VITE_CCTV_URL_2
   const IS_WEBSOCKET_ENABLE = import.meta.env.VITE_IS_WEBSOCKET_ENABLE
   const IS_3D_ENABLE = import.meta.env.VITE_IS_3D_ENABLE
   const wimStatistic = ref({
@@ -499,12 +375,6 @@
     totalIsPassImageService: 'N/A',
     totalReportStatus: 'N/A',
   })
-  const totalOverWeightFromIMPS = ref('N/A')
-  const totalErrorFromIMPS = ref('N/A')
-  const totalPassFromIMPS = ref('N/A')
-  const dataSetForHistoryChart = ref({ labels: [], datasets: [] })
-  const currentTrafficFromSummaryReportAPI = ref({ data: [], vehicleClass: [] })
-  const refreshChart = ref(0)
   const isHistoryChartLoadingReadyToShow = ref(false)
   const isShowLoadingDialog = ref(true)
   const { filters, filter, currentTrafficList, alertPercentOptions, selectedAlertPercent } = storeToRefs(listCarStore)
@@ -518,8 +388,6 @@
       notificationModule.value.play()
     }
     await loadReportData()
-    await loadIMPSSummaryData()
-    await getDataSetForHistoryChart()
     await loadWIMData()
   }
 
@@ -534,23 +402,12 @@
   })
 
   onMounted(async () => {
-    setTimeout(() => {
-      const statisticCardHeight = document.getElementById('statisticCard').offsetHeight
-      document.getElementById('historyChartCard').style.height = `${statisticCardHeight}px`
-      isHistoryChartLoadingReadyToShow.value = true
-    }, 1000)
-    const { vehicleType } = route.query
-    if (vehicleType && isNumber(+vehicleType)) {
-      filter.value.vehicleType = vehicleType
-    }
     listCarStore.resetFilter()
     listCarStore.clearAllOptions()
     renderCCTV()
     renderWebsocket()
     await generateFilterOption()
     await loadReportData()
-    await loadIMPSSummaryData()
-    await getDataSetForHistoryChart()
     // await loadWIMData();
     if (IS_3D_ENABLE.toLowerCase() === 'true') {
       setInterval(function () {
@@ -560,10 +417,13 @@
   })
 
   function renderCCTV() {
-    if (CCTV_URL) {
-      new Jsmpeg.Player(CCTV_URL, { canvas: document.getElementById('cctvCanvas') })
-      new Jsmpeg.Player(CCTV_URL, { canvas: document.getElementById('cctvCanvas_m') })
-      new Jsmpeg.Player(CCTV_URL, { canvas: document.getElementById('cctvCanvas_m2') })
+    if (CCTV_URL_1) {
+      new Jsmpeg.Player(CCTV_URL_1, { canvas: document.getElementById('cctvCanvas') })
+      new Jsmpeg.Player(CCTV_URL_1, { canvas: document.getElementById('cctvCanvas_m') })
+    }
+    if (CCTV_URL_2) {
+      new Jsmpeg.Player(CCTV_URL_2, { canvas: document.getElementById('cctvCanvas2') })
+      new Jsmpeg.Player(CCTV_URL_2, { canvas: document.getElementById('cctvCanvas_m2') })
     }
   }
 
@@ -610,90 +470,6 @@
         totalReportStatus: wimStatisticFromAPI.totalReportStatus || 0,
       }
     }
-  }
-
-  async function loadIMPSSummaryData() {
-    const starDate = dayjs().format('YYYY-MM-DDT00:00:00+07:00')
-    let endDate = dayjs().format('YYYY-MM-DDTHH:mm:ss+07:00')
-    if (endDate < starDate) {
-      endDate = starDate
-    }
-    filter.value.startDate = starDate
-    filter.value.endDate = endDate
-    const report = await listCarStore.getReport(filter.value)
-    if (report) {
-      currentTrafficFromSummaryReportAPI.value = report
-      const { data } = report
-      totalOverWeightFromIMPS.value = data.map((item) => item.overWeight).reduce((partialSum, a) => partialSum + a, 0)
-      totalErrorFromIMPS.value = data.map((item) => item.errorFlag).reduce((partialSum, a) => partialSum + a, 0)
-      totalPassFromIMPS.value = data.map((item) => item.total).reduce((partialSum, a) => partialSum + a, 0)
-    }
-  }
-
-  async function getDataSetForHistoryChart() {
-    const timeFrames = [
-      {
-        label: '00:00-03:59',
-        startTime: dayjs().format('YYYY-MM-DDT00:00:00+07:00'),
-        endTime: dayjs().format('YYYY-MM-DDT03:59:59+07:00'),
-      },
-      {
-        label: '04:00-07:59',
-        startTime: dayjs().format('YYYY-MM-DDT04:00:00+07:00'),
-        endTime: dayjs().format('YYYY-MM-DDT07:59:59+07:00'),
-      },
-      {
-        label: '08:00-11:59',
-        startTime: dayjs().format('YYYY-MM-DDT08:00:00+07:00'),
-        endTime: dayjs().format('YYYY-MM-DDT11:59:59+07:00'),
-      },
-      {
-        label: '12:00-15:59',
-        startTime: dayjs().format('YYYY-MM-DDT12:00:00+07:00'),
-        endTime: dayjs().format('YYYY-MM-DDT15:59:59+07:00'),
-      },
-      {
-        label: '16:00-19:59',
-        startTime: dayjs().format('YYYY-MM-DDT16:00:00+07:00'),
-        endTime: dayjs().format('YYYY-MM-DDT19:59:59+07:00'),
-      },
-      {
-        label: '20:00-23:59',
-        startTime: dayjs().format('YYYY-MM-DDT20:00:00+07:00'),
-        endTime: dayjs().format('YYYY-MM-DDT23:59:59+07:00'),
-      },
-    ]
-    const data = await listCarStore.generateHistoryReportDataByTimeframe(timeFrames)
-    const labels = []
-    const totalTraffics = []
-    const totalOverWeights = []
-
-    for (const item of data) {
-      const { label, data } = item
-      const total = data.map((item) => item.total).reduce((partialSum, a) => partialSum + a, 0)
-      const totalOverWeight = data.map((item) => item.overWeight).reduce((partialSum, a) => partialSum + a, 0)
-      labels.push(label)
-      totalTraffics.push(total)
-      totalOverWeights.push(totalOverWeight)
-    }
-    dataSetForHistoryChart.value = {
-      labels,
-      datasets: [
-        {
-          label: 'จำนวนรถทั้งหมด',
-          borderColor: '#488A99',
-          backgroundColor: '#488A99',
-          data: totalTraffics,
-        },
-        {
-          label: 'น้ำหนักเกิน',
-          borderColor: '#AC3E31',
-          backgroundColor: '#AC3E31',
-          data: totalOverWeights,
-        },
-      ],
-    }
-    refreshChart.value++
   }
 
   function isWaitingForSyncDataFrom3DService(plate, timestamp) {

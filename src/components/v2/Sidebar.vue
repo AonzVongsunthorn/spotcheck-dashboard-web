@@ -18,11 +18,11 @@
   </div>
   <div class="side-bar relative hidden xl:block">
     <div>
-      <h1 class="text-4xl py-10 px-5">ImPS (WIM)</h1>
+      <h1 class="text-4xl py-10 px-5">{{ data.stationName ? data.stationName : 'ImPS (WIM)' }}</h1>
     </div>
     <div class="account flex flex-col items-center">
       <img src="/user-icon.png" alt="" width="48" />
-      <p class="uppercase mt-3">{{ getLoggedInUserFullName }}</p>
+      <p class="uppercase mt-3">{{ (getLoggedInUserFullName || '').split(' ')[0] }}</p>
     </div>
     <div class="menu">
       <ul>
@@ -43,7 +43,7 @@
     </div>
     <div class="absolute bottom-0 menu w-full">
       <ul>
-        <li class="hover:bg-[#979ab738]"><router-link :to="{ name: 'v2-login' }">Logout</router-link></li>
+        <li class="hover:bg-[#979ab738]"><router-link :to="{ name: 'login' }">Logout</router-link></li>
       </ul>
     </div>
   </div>
@@ -92,14 +92,11 @@
         <li class="hover:bg-[#979ab738]">
           <router-link :to="{ name: 'station-setup' }" @click="toggleMenu()">ตั้งค่าสถานี</router-link>
         </li>
-        <!-- <li class="hover:bg-[#979ab738]">
-          <router-link :to="{ name: 'service-status' }">สถานะการดึงข้อมูล</router-link>
-        </li> -->
       </ul>
     </div>
     <div class="absolute bottom-0 menu w-full">
       <ul>
-        <li class="hover:bg-[#979ab738]"><router-link :to="{ name: 'v2-login' }">Logout</router-link></li>
+        <li class="hover:bg-[#979ab738]"><router-link :to="{ name: 'login' }">Logout</router-link></li>
       </ul>
     </div>
   </div>
@@ -107,9 +104,9 @@
 <script setup lang="ts">
   import { storeToRefs } from 'pinia'
   import { onMounted, ref } from 'vue'
-  import { useLoginStore } from '../../stores/v2/loginStore'
+  import { useAuthStore } from '../../stores/authStore'
   import { useStationSetupStore } from '../../stores/v2/stationSetupStore'
-  const loginStore = useLoginStore()
+  const loginStore = useAuthStore()
   const stationSetupStore = useStationSetupStore()
 
   const { data } = storeToRefs(stationSetupStore)

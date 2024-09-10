@@ -5,7 +5,13 @@
     "login": "เข้าสู่ระบบ",
     "password": "รหัสผ่าน",
     "userNotFound": "ไม่พบข้อมูลผู้ใช้งาน หรือรหัสผ่านผิดพลาด",
-    "loggedInSuccessfully": "เข้าสู่ระบบสำเร็จ"
+    "loggedInSuccessfully": "เข้าสู่ระบบสำเร็จ",
+    "otp": "ยืนยันตัวตนผ่าน One time password (OTP)",
+    "otpBtn": "ยืนยันรหัสใช้ครั้งเดียว (OTP)",
+    "retryOTPBtn": "ส่งรหัสใช้ครั้งเดียว (OTP) อีกครั้ง",
+    "verifyOTPFail": "การยินยันรหัสใช้ครั้งเดียว (OTP) ไม่ถูกต้อง",
+    "fillOTPError": "กรุณากรอกรหัสใช้ครั้งเดียว (OTP)",
+    "backToLoginPage": "กลับหน้าเข้าสู่ระบบ"
   },
   "menu": {
     "dashboard": "Dashboard",

@@ -1,5 +1,5 @@
-# imps-dashboard
-IMPS Dashboard base on `vue@3.x` wth [vuestic](https://vuestic.epicmax.co/admin/dashboard) for the core theme.
+# spotcheck-dashboard-web
+Spotcheck Dashboard Web base on `vue@3.x` wth [vuestic](https://vuestic.epicmax.co/admin/dashboard) for the core theme.
 
 ## Prerequitsite
 - nodejs version >= v16.18.0

@@ -1,38 +1,36 @@
 import type { NavigationGuardNext } from 'vue-router'
-import { SESSION_TOKEN_KEY } from "../../constants";
-import dayjs from 'dayjs'
-import { SessionObject } from "../../stores/v2/loginStore/interface";
+import { getOTPVerificationStatus, getProfile } from '../../services/api/auth'
+const IS_REQUIRED_OTP = import.meta.env.VITE_IS_REQUIRED_OTP
 
-export default async function requireAuth({ next, loginStore }: { next: NavigationGuardNext; loginStore: any }) {
-  const loginRouteName = 'v2-login'
+export default async function requireAuth({ next, authStore }: { next: NavigationGuardNext; authStore: any }) {
   try {
-    const user = localStorage.getItem(SESSION_TOKEN_KEY);
+    const user = await getProfile()
     if (!user) {
       return next({
-        name: loginRouteName,
+        name: 'login',
       })
     }
-    const decodeUser: SessionObject = JSON.parse(user)
-    if (!decodeUser.expiredAt) {
+    const { data } = user
+    if (!data.isAlive) {
       return next({
-        name: loginRouteName,
+        name: 'login',
       })
     }
-    if (dayjs().unix() > decodeUser.expiredAt) {
-      return next({
-        name: loginRouteName,
-      })
+    if (IS_REQUIRED_OTP.toLowerCase() === 'true') {
+      const otpVerificationStatus = await getOTPVerificationStatus()
+      const { data } = otpVerificationStatus
+      const { isPassOTPVerification } = data
+      if (!isPassOTPVerification) {
+        return next({
+          name: 'login',
+        })
+      }
     }
-    loginStore.setAuthUser({
-      name: decodeUser.name,
-      token: decodeUser.token,
-      basicAuth: decodeUser.basicAuth,
-    })
+    const { name, email, role, isAlive, telephoneNo } = data
+    authStore.setAuthUser({ name, email, role, isAlive, isDoneOTPVerification: true, telephoneNo })
   } catch (error) {
     console.error('error', error)
-    return next({
-      name: loginRouteName,
-    })
+    document.location.href = 'login'
   }
 
   return next()
