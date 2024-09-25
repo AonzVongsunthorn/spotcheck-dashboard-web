@@ -43,8 +43,8 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('../components/v2/report/PrintReport.vue'),
   },
   {
-    name: 'v2',
-    path: '/v2/dashboard',
+    name: '',
+    path: '/',
     component: Dashboard2,
     children: [
       {
@@ -65,7 +65,7 @@ const routes: Array<RouteRecordRaw> = [
       },
       {
         name: 'dashboard',
-        path: 'dashboard-v2',
+        path: 'dashboard',
         component: () => import('../pages/v2/admin/DashboardOfImageService.vue'),
         meta: {
           middleware: [requireAuth],
