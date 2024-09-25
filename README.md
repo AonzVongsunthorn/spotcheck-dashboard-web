@@ -26,5 +26,5 @@ This project has many configuration which be setted through `env` command line (
 
 |Configuration|Required| type   | Default value | Description                  |
 |-------------|--------|--------|---------------|------------------------------|
-|VITE_BASE_API_URL|Yes| string | http://localhost:8080/  | The API Endpoint of IMPS API |
+|VITE_BASE_IMPS_API_URL|Yes| string | http://localhost:8080/  | The API Endpoint of IMPS API |
 
