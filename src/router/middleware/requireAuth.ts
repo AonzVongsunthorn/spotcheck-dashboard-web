@@ -30,7 +30,9 @@ export default async function requireAuth({ next, authStore }: { next: Navigatio
     authStore.setAuthUser({ name, email, role, isAlive, isDoneOTPVerification: true, telephoneNo })
   } catch (error) {
     console.error('error', error)
-    document.location.href = 'login'
+    return next({
+      name: 'login',
+    })
   }
 
   return next()
